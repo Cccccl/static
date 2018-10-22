@@ -1,17 +1,17 @@
 import Vue from 'vue'
 import Main from './main.vue'
-let AlertConstructor = Vue.extend(Main)
+let ConfirmConstructor = Vue.extend(Main)
 
 let instance
 let instances = []
 let seed = 1
 
-let Alert = (options = {}) => {
+let Confirm = (options = {}) => {
   if (Vue.prototype.$isServer) return
-  let id = 'alert_' + seed++
+  let id = 'confirm_' + seed++
   return new Promise((resolve, reject) => {
     const { ...rest } = options
-    instance = new AlertConstructor({
+    instance = new ConfirmConstructor({
       data: {
         ...rest
       },
@@ -40,4 +40,4 @@ let Alert = (options = {}) => {
   })
 }
 
-export default Alert
+export default Confirm

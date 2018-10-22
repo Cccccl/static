@@ -1,19 +1,20 @@
 <template>
-  <transition name="alert" v-on:after-leave="afterLeave">
+  <transition name="confirm" v-on:after-leave="afterLeave">
     <div
       :class="[
-        'alert',
-        type ? `alert--${ type }` : '',
+        'confirm',
+        type ? `confirm--${ type }` : '',
       ]"
       v-show="visible"
     >
       <div class="box">
         <div class="box-inner">
-          <div class="alert__title" v-if="title">{{title}}</div>
-          <div class="alert__content">{{content}}</div>
+          <div class="confirm__title" v-if="title">{{title}}</div>
+          <div class="confirm__content">{{content}}</div>
         </div>
         <div class="box-buttons">
-          <span class="alert__btn-success" @click="success">{{submitText}}</span>
+          <span class="confirm__btn-cancel" @click="cancel">{{cancelText}}</span>
+          <span class="confirm__btn-success" @click="success">{{submitText}}</span>
         </div>
       </div>
     </div>
@@ -21,7 +22,7 @@
 </template>
 <script>
 export default {
-  name: 'alert',
+  name: 'confirm',
   data () {
     return {
       visible: false,
@@ -50,7 +51,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.alert{
+.confirm{
   background: rgba(0,0,0,0.5);
   position: fixed;
   left: 0;
@@ -70,7 +71,7 @@ export default {
     padding: 20px;
     border-radius: 6px;
   }
-  .alert__title{
+  .confirm__title{
     padding-left: 0;
     margin-bottom: 0;
     font-size: 16px;
@@ -78,7 +79,7 @@ export default {
     height: 18px;
     color: #333;
   }
-  .alert__content{
+  .confirm__content{
     padding: 14px 0;
     line-height: 24px;
     color: #48576a;
@@ -87,7 +88,7 @@ export default {
   .box-buttons{
     text-align: right;
   }
-  .alert__btn-success{
+  .confirm__btn-success{
     background: #20a0ff;
     border-color: #20a0ff;
     display: inline-block;
@@ -104,18 +105,35 @@ export default {
       cursor: pointer;
     }
   }
+  .confirm__btn-cancel{
+    background: #ea6c6c;
+    border-color: #ea6c6c;
+    display: inline-block;
+    line-height: 1;
+    white-space: nowrap;
+    color: #fff;
+    margin: 0;
+    padding: 10px 15px;
+    border-radius: 4px;
+    &:hover{
+      background: #a20101;
+      border-color: #a20101;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
 }
-.alert--info .alert__content{color:#909399}
-.alert--success .alert__content{color:#67c23a}
-.alert--warning .alert__content{color:#e6a23c}
-.alert--error .alert__content{color:#f56c6c}
-.alert-enter, .alert-leave-to{
+.confirm--info .confirm__content{color:#909399}
+.confirm--success .confirm__content{color:#67c23a}
+.confirm--warning .confirm__content{color:#e6a23c}
+.confirm--error .confirm__content{color:#f56c6c}
+.confirm-enter, .confirm-leave-to{
   opacity: 0;
 }
-.alert-enter-active{
+.confirm-enter-active{
   transition: opacity 2s;
 }
-.alert-leave-active{
+.confirm-leave-active{
   transition: opacity 2s;
 }
 </style>

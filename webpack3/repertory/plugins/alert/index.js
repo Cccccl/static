@@ -5,5 +5,6 @@ Alert.install = (Vue, options) => {
   Vue.myGlobalMethod = Alert
   // 4. 添加实例方法
   Vue.prototype.$alert = Alert
+  // Vue.component(Alert.name, Alert)
 }
 export default Alert
